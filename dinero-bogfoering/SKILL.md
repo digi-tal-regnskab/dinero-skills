@@ -45,7 +45,10 @@ betalinger, valutabilag) håndteret med dømmekraft.
      skattekonto- og momsafregninger, mellemregning → kan bogføres direkte.
    - **Udgifter:** bogføres KUN med et matchet bilag fra arkivet (beløb +
      betalingsvindue + leverandør — heuristikken i `/dinero-bankafstemning`).
-     Bilaget vedhæftes posteringen. **Auto-kladder tæller som bilag:** Dinero
+     Bilaget vedhæftes posteringen. Bemærk: én arkivfil kan kun knyttes til
+     ÉT bilag via MCP — skal samme faktura dokumentere endnu en postering (fx
+     en konstateret dublet), upload filen igen og brug det nye fileGuid.
+     **Auto-kladder tæller som bilag:** Dinero
      auto-opretter ofte en købskladde når en PDF uploades — den er ikke
      brugerens igangværende arbejde, bare dokumentation. Vedhæft filen til din
      kassekladde-postering som ethvert andet bilag; når posteringen bogføres,
@@ -109,7 +112,8 @@ udfør, verificér.
    permanent: via MCP kan bogførte dokumenter ikke slettes, og sletter brugeren
    dem i Dineros UI, er fakturanummeret alligevel forbrugt. Vis brugeren præcis hvad du
    har lavet (beløb, konto, momskode, dato, modpart) før der bogføres. Kladder kan
-   slettes — bogfør aldrig noget "for at prøve".
+   slettes — dog kan finansbilag-kladder kun slettes i Dineros UI, ikke via MCP —
+   og bogfør aldrig noget "for at prøve".
 2. **Verificér efter skrivning.** Frisk opslag efter enhver oprettelse/bogføring —
    rapportér det du faktisk ser, ikke det du forventede.
 3. **Vælg rigtig organisation.** Har brugerens login adgang til flere virksomheder,
@@ -138,6 +142,10 @@ udfør, verificér.
    ét regnskabsår ad gangen. Rapporter viser kun bogført materiale.
 6. **Beløbsfælden:** købsbilag og kassekladde-linjer angives **inkl. moms**;
    salgsfaktura-linjer angives **ekskl. moms**. Vis altid begge tal.
+   I finansbilag skal momskoden sidde på linjens **hovedkonto** — en momskode på
+   modkontoen bliver IKKE beregnet (kladden viser moms 0). Vend i stedet
+   retningen med et negativt beløb (fx salg som minus på omsætningskontoen), og
+   verificér ALTID kladdens momssplit med et frisk opslag, FØR der bogføres.
 7. **Flag i stedet for at gætte** ved uklare betalinger og skarpe fradragsregler —
    og vær ærlig om at AI kan blande moms-/skatteregler sammen; henvis til
    SKAT/revisor ved tvivl. Brugeren bærer ansvaret for regnskabet.
