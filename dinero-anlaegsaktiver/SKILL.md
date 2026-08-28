@@ -48,8 +48,11 @@ skattemæssige opgørelse.
 ## Bogføringen
 
 - **Køb (aktivering):** kostpris på balancens anlægskonto (ikke omkostning),
-  købsmoms efter normale regler. Opret derefter aktivet i **Dineros
-  anlægskartotek**, så afskrivningerne kører af sig selv.
+  købsmoms efter normale regler. Aktivet skal derefter oprettes i **Dineros
+  anlægskartotek**, så afskrivningerne kører af sig selv — det kan MCP'en ikke,
+  så bed brugeren gøre det i Dineros UI, og skriv det på listen over
+  udestående. Meld aldrig aktiveringen som færdig, før kartotek-posten findes:
+  uden den afskrives der ikke.
 - **Afskrivning:** kører automatisk fra kartoteket. Din opgave er at kontrollere
   at den faktisk gør det (er aktivet oprettet? passer levetiden?) — ikke at
   bogføre den i hånden. Manuel afskrivning via kassekladde er kun relevant for
@@ -95,11 +98,24 @@ udfør, verificér.
    før du planlægger. Ingen Dinero-tools? Så er forbindelsen ikke sat op — guide:
    tilføj `https://mcp.dinero.dk/mcp` som connector (login via Visma Connect,
    kræver Dinero Pro/Total) — og stop der; lad som om intet er udført.
-5. **MCP v1 kan:** slå fakturaer/kontakter/produkter/kontoplan op; oprette og
-   bogføre fakturaer, kreditnotaer, køb og kassekladder; registrere betalinger;
-   hente bilag som PDF; uploade til bilagsarkivet; trække saldobalance og
-   kontospecifikation. **Kan bevidst IKKE:** sende fakturaer, hente bankdata eller
-   læse ubogførte kassekladde-linjer — og rapporter viser kun bogført materiale.
+5. **Hvad MCP'en kan — og ikke kan.**
+   **Opslag:** organisationer, kontakter, produkter, kontoplan (og den separate
+   købskontoliste), momskoder, regnskabsår, salgsfakturaer og -kreditnotaer
+   (filtrérbart på status og dato), kontoudtog pr. kontakt, posteringer i et
+   datointerval, og bilagsarkivets filer — herunder hvilke der endnu er ubrugte,
+   og den smart-scannede købskladde en fil har affødt.
+   **Skrivning:** oprette og bogføre salgsfakturaer, salgs- og købskreditnotaer,
+   købsbilag og finansbilag; registrere ind- og udbetalinger; oprette og rette
+   kontakter; oprette produkter; uploade bilag; slette **kladder**.
+   **Tilbud:** oprette, liste, **sende** og konvertere til faktura.
+   **Kan IKKE:** sende fakturaer og kreditnotaer (kun tilbud kan sendes); hente
+   bankdata; læse ubogførte kassekladde-linjer (købs- og fakturakladder kan
+   derimod godt læses); oprette eller ændre konti i kontoplanen; oprette
+   regnskabsår; slette bogført materiale.
+   **Rapport-fælden:** resultat, balance og saldobalance kan kun trækkes for et
+   **helt regnskabsår** — ikke en vilkårlig periode. Skal du bruge en måned eller
+   et kvartal, byg tallet af posteringslisten, som til gengæld kun kan spænde over
+   ét regnskabsår ad gangen. Rapporter viser kun bogført materiale.
 6. **Beløbsfælden:** købsbilag og kassekladde-linjer angives **inkl. moms**;
    salgsfaktura-linjer angives **ekskl. moms**. Vis altid begge tal.
 7. **Flag i stedet for at gætte** ved uklare betalinger og skarpe fradragsregler —

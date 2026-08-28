@@ -103,9 +103,11 @@ kald et modul direkte med dets kommando, fx `/dinero-maanedsluk`.
   altid væsentlige skatte- og momsspørgsmål hos SKAT eller din revisor.
 - Assistenten arbejder med dit eget Dinero-login og dine egne rettigheder. Adgangen
   kan altid fjernes igen i Dinero under Konto → Brugerprofil → Visma Connect.
-- Dineros MCP-server er i beta og kan ændre sig uden varsel. I første version kan
-  den bevidst **ikke** sende fakturaer eller hente bankdata — modulerne kender
-  begrænsningerne og arbejder udenom dem (bankdata leveres via kassekladde-eksport).
+- Dineros MCP-server er i beta og kan ændre sig uden varsel. Den kan bevidst
+  **ikke** sende fakturaer og kreditnotaer (kun tilbud), hente bankdata, oprette
+  konti i kontoplanen eller oprette regnskabsår — modulerne kender begrænsningerne
+  og arbejder udenom dem: bankdata leveres via kassekladde-eksport, og hvor der
+  mangler en konto eller et regnskabsår, beder modulet dig oprette det i Dineros UI.
 - Læs Dineros egne [MCP-betingelser](https://dinero.dk/sikkerhed/betingelser-mcp/).
 
 ## Uofficiel

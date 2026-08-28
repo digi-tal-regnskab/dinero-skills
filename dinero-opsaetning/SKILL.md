@@ -80,6 +80,22 @@ mangler).
 Skriv-test uden skade: opret en faktura-KLADDE, se den, og slet kladden igen.
 Bogfør ALDRIG et testdokument — fakturanumre forbruges permanent.
 
+## Det brugeren selv skal gøre i Dinero
+
+MCP'en kan skrive bilag, men ikke ændre regnskabets rammer. Rammer du et af
+disse, så stop, forklar hvorfor, og bed brugeren gøre det i Dineros UI — fortsæt
+først når det er bekræftet gjort:
+
+- **Oprette eller ændre konti i kontoplanen** (Indstillinger → Kontoplan) —
+  fx en mellemregningskonto, en skattekonto eller en mellemkonto pr. indløser.
+- **Oprette et regnskabsår** (Indstillinger → Regnskabsår). Uden året afvises
+  enhver postering med den dato.
+- **Oprette aktiver i anlægskartoteket**, som afskrivningerne kører fra.
+- **Sende fakturaer og kreditnotaer** (kun tilbud kan sendes via MCP).
+
+Find aldrig en vej udenom ved at bruge en tilfældig eksisterende konto — det
+flytter bare fejlen ind i regnskabet.
+
 ## Grundregler (fælles for alle Dinero-skills)
 
 Du arbejder i en rigtig virksomheds rigtige regnskab via Dineros officielle
@@ -99,11 +115,24 @@ udfør, verificér.
    før du planlægger. Ingen Dinero-tools? Så er forbindelsen ikke sat op — guide:
    tilføj `https://mcp.dinero.dk/mcp` som connector (login via Visma Connect,
    kræver Dinero Pro/Total) — og stop der; lad som om intet er udført.
-5. **MCP v1 kan:** slå fakturaer/kontakter/produkter/kontoplan op; oprette og
-   bogføre fakturaer, kreditnotaer, køb og kassekladder; registrere betalinger;
-   hente bilag som PDF; uploade til bilagsarkivet; trække saldobalance og
-   kontospecifikation. **Kan bevidst IKKE:** sende fakturaer, hente bankdata eller
-   læse ubogførte kassekladde-linjer — og rapporter viser kun bogført materiale.
+5. **Hvad MCP'en kan — og ikke kan.**
+   **Opslag:** organisationer, kontakter, produkter, kontoplan (og den separate
+   købskontoliste), momskoder, regnskabsår, salgsfakturaer og -kreditnotaer
+   (filtrérbart på status og dato), kontoudtog pr. kontakt, posteringer i et
+   datointerval, og bilagsarkivets filer — herunder hvilke der endnu er ubrugte,
+   og den smart-scannede købskladde en fil har affødt.
+   **Skrivning:** oprette og bogføre salgsfakturaer, salgs- og købskreditnotaer,
+   købsbilag og finansbilag; registrere ind- og udbetalinger; oprette og rette
+   kontakter; oprette produkter; uploade bilag; slette **kladder**.
+   **Tilbud:** oprette, liste, **sende** og konvertere til faktura.
+   **Kan IKKE:** sende fakturaer og kreditnotaer (kun tilbud kan sendes); hente
+   bankdata; læse ubogførte kassekladde-linjer (købs- og fakturakladder kan
+   derimod godt læses); oprette eller ændre konti i kontoplanen; oprette
+   regnskabsår; slette bogført materiale.
+   **Rapport-fælden:** resultat, balance og saldobalance kan kun trækkes for et
+   **helt regnskabsår** — ikke en vilkårlig periode. Skal du bruge en måned eller
+   et kvartal, byg tallet af posteringslisten, som til gengæld kun kan spænde over
+   ét regnskabsår ad gangen. Rapporter viser kun bogført materiale.
 6. **Beløbsfælden:** købsbilag og kassekladde-linjer angives **inkl. moms**;
    salgsfaktura-linjer angives **ekskl. moms**. Vis altid begge tal.
 7. **Flag i stedet for at gætte** ved uklare betalinger og skarpe fradragsregler —
