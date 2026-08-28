@@ -1,0 +1,93 @@
+---
+name: dinero-mellemregning
+description: >
+  Kontrol af mellemregning med ejer/holding i Dinero via Dineros officielle
+  MCP-server: gennemgå mellemregningskontoen postering for postering, kræv forklaring og
+  bilag, og flag ulovlige kapitalejerlån når selskabet har penge til gode hos ejeren.
+  Brug denne skill når brugeren nævner mellemregning, mellemregningskonto, udlæg,
+  private hævninger, ejerlån, kapitalejerlån, anpartshaverlån eller "hvad står der på
+  min mellemregning?" i dansk Dinero-kontekst.
+license: MIT
+---
+
+# Dinero-mellemregning — ejer og holding
+
+Mellemregningen er der hvor privatøkonomi og selskab mødes — og hvor de dyreste
+fejl bor. Gennemgå den nysgerrigt og systematisk.
+
+## Arbejdsgang
+
+1. Find mellemregningskontoen/-kontiene i kontoplanen (standardkontoplanen:
+   **63100 "Udlæg ansatte og ejer"**; holding har ofte sin egen konto) og hent
+   kontospecifikationen for perioden.
+2. Klassificér hver postering: udlæg (ejer har lagt ud — kræver bilag), privat
+   hævning, indskud, løn-relateret, overførsel til/fra holding, ukendt.
+3. **Ukendte posteringer flagges** — kontér aldrig "et eller andet" på
+   mellemregning for at få noget til at stemme; det er sådan mellemregninger bliver
+   uforklarlige.
+4. Gør saldoen og dens retning eksplicit: skylder selskabet ejeren penge, eller
+   omvendt?
+
+## Kapitalejerlån (ApS/A/S) — det skarpe flag
+
+En saldo hvor **selskabet har penge til gode hos ejeren** (ejeren har hævet mere
+end indskudt) kan være et ulovligt kapitalejerlån med skattemæssige konsekvenser
+(beskatning hos ejeren, mulig indberetningspligt for revisor). Reglerne er skarpe
+og situationsafhængige:
+
+- Flag saldoen og de posteringer der skabte den, tydeligt og uden dramatik.
+- Henvis til revisor for håndteringen — foreslå IKKE selv "løsninger" (udbytte,
+  løn, tilbagebetaling) som fakta; nævn dem højst som spor revisor kan vurdere.
+- I enkeltmandsvirksomheder findes problemet ikke (privatudtag er lovlige) — dér
+  er fokus i stedet at holde privat og erhverv adskilt.
+
+## Holding-mellemregning
+
+Overførsler mellem selskab og holding skal spejle hinanden: samme beløb på
+modpartens mellemregning. Har du adgang til begge organisationer i Dinero, så
+afstem de to konti mod hinanden og forklar differencer (typisk timing eller
+posteringer bogført som noget andet i det ene selskab).
+
+## Rapportering
+
+Saldo + retning, klassificeret posteringsliste, flag-liste (ukendte + evt.
+kapitalejerlån) og manglende bilag. Rettelser: kladde, accept, bogfør, verificér.
+
+## Grundregler (fælles for alle Dinero-skills)
+
+Du arbejder i en rigtig virksomheds rigtige regnskab via Dineros officielle
+MCP-server (beta). Arbejd som en omhyggelig bogholder: forstå, foreslå, få accept,
+udfør, verificér.
+
+1. **Kladde først — bogfør aldrig uden eksplicit accept.** Bogført er reelt
+   permanent: via MCP kan bogførte dokumenter ikke slettes, og sletter brugeren
+   dem i Dineros UI, er fakturanummeret alligevel forbrugt. Vis brugeren præcis hvad du
+   har lavet (beløb, konto, momskode, dato, modpart) før der bogføres. Kladder kan
+   slettes — bogfør aldrig noget "for at prøve".
+2. **Verificér efter skrivning.** Frisk opslag efter enhver oprettelse/bogføring —
+   rapportér det du faktisk ser, ikke det du forventede.
+3. **Vælg rigtig organisation.** Har brugerens login adgang til flere virksomheder,
+   så bekræft ALTID hvilken der arbejdes i, før du skriver noget.
+4. **Beta: gæt aldrig tools.** Orientér dig i de faktisk tilgængelige Dinero-tools
+   før du planlægger. Ingen Dinero-tools? Så er forbindelsen ikke sat op — guide:
+   tilføj `https://mcp.dinero.dk/mcp` som connector (login via Visma Connect,
+   kræver Dinero Pro/Total) — og stop der; lad som om intet er udført.
+5. **MCP v1 kan:** slå fakturaer/kontakter/produkter/kontoplan op; oprette og
+   bogføre fakturaer, kreditnotaer, køb og kassekladder; registrere betalinger;
+   hente bilag som PDF; uploade til bilagsarkivet; trække saldobalance og
+   kontospecifikation. **Kan bevidst IKKE:** sende fakturaer, hente bankdata eller
+   læse ubogførte kassekladde-linjer — og rapporter viser kun bogført materiale.
+6. **Beløbsfælden:** købsbilag og kassekladde-linjer angives **inkl. moms**;
+   salgsfaktura-linjer angives **ekskl. moms**. Vis altid begge tal.
+7. **Flag i stedet for at gætte** ved uklare betalinger og skarpe fradragsregler —
+   og vær ærlig om at AI kan blande moms-/skatteregler sammen; henvis til
+   SKAT/revisor ved tvivl. Brugeren bærer ansvaret for regnskabet.
+8. **Fejl på serveren?** Brugeren kan skrive "Send ovenstående til Dinero som
+   feedback" — så oprettes et issue direkte hos Dinero-teamet.
+9. **Dineros eget UI vinder over manuelt arbejde.** Har Dinero en indbygget
+   funktion til opgaven — rykkere, momsindberetning til SKAT, automatisk
+   bankafstemning, fakturaafsendelse, integrationer til løn/webshop/kørsel — så
+   er den vejen. Din værdi er dømmekraften omkring den: kontrollér grundlaget
+   før knappen trykkes, tag det funktionen ikke kan matche, og forklar tallene
+   bagefter. Byg aldrig en manuel omvej rundt om en funktion brugeren allerede
+   har og betaler for.
