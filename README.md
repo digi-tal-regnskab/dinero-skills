@@ -57,22 +57,34 @@ moduler du bruger — hvert modul er selvstændigt og indeholder de fælles grun
 **claude.ai / Claude Desktop:** Indstillinger → Connectors → *Add custom connector* →
 `https://mcp.dinero.dk/mcp` → log ind via Visma Connect.
 
-**Claude Code:**
+**Claude Code:** klares af `install.sh` (se nedenfor), eller manuelt:
 
 ```bash
-claude mcp add --transport http dinero https://mcp.dinero.dk/mcp
+claude mcp add --scope user --transport http dinero https://mcp.dinero.dk/mcp
 ```
+
+Derefter **login**: kør `/mcp` i en interaktiv `claude`-session og gennemfør
+Visma Connect i browseren. Det skal kun gøres én gang — derefter virker
+forbindelsen også i scripts og baggrundssessioner.
 
 ### 2. Installér skills
 
-**Claude Code — alle moduler:**
+**Claude Code — ét trin (anbefalet):**
 
 ```bash
 git clone https://github.com/digi-tal-regnskab/dinero-skills.git
-cp -r dinero-skills/dinero-* ~/.claude/skills/
+cd dinero-skills && ./install.sh
 ```
 
-**Claude Code — kun udvalgte moduler:** kopiér blot de mapper du vil have.
+Scriptet kopierer modulerne til `~/.claude/skills/`, tilføjer Dineros
+MCP-server med user scope, og fortæller dig præcis hvad der mangler.
+Kun udvalgte moduler: `./install.sh bogfoering momskontrol`
+
+**Manuelt**, hvis du hellere vil:
+
+```bash
+cp -r dinero-* ~/.claude/skills/
+```
 
 **claude.ai / Claude Desktop:** zip den enkelte modulmappe (fx
 `dinero-bankafstemning/`) og upload den under Indstillinger → Capabilities →
@@ -105,6 +117,7 @@ på eget ansvar.
 ## Struktur
 
 ```
+install.sh                # Installerer skills + forbinder MCP-serveren
 dinero-<modul>/
 ├── SKILL.md              # Modulets arbejdsgang + fælles grundregler
 └── references/           # (hvor relevant) fx kontering-og-moms.md

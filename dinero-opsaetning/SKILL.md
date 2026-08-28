@@ -36,11 +36,23 @@ connector" → indsæt URL'en → gennemfør Visma Connect-login.
 **Claude Code:**
 
 ```bash
-claude mcp add --transport http dinero https://mcp.dinero.dk/mcp
+claude mcp add --scope user --transport http dinero https://mcp.dinero.dk/mcp
 ```
 
-Første brug udløser OAuth-login i browseren (eller kør `/mcp` i en interaktiv
-session).
+`--scope user` er vigtig: uden den lander serveren i *local* scope og virker kun
+i den mappe, kommandoen blev kørt i. Regnskabet skal typisk være tilgængeligt i
+alle projekter.
+
+Derefter **login**: kør `/mcp` i en **interaktiv** `claude`-session, vælg dinero
+og gennemfør Visma Connect i browseren. Login kan ikke gennemføres i en
+non-interaktiv session (fx `claude -p`, et script eller en baggrundsagent) —
+serveren kan tilføjes, men status forbliver "Needs authentication", indtil nogen
+logger ind interaktivt én gang. Efter det virker forbindelsen også i
+non-interaktive sessioner.
+
+Verificér undervejs: `claude mcp get dinero` viser scope og status, og et kald
+mod endpointet uden token svarer korrekt `HTTP 401` (= serveren lever, login
+mangler).
 
 ## Fjern adgangen igen
 
