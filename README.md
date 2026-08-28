@@ -68,7 +68,7 @@ claude mcp add --transport http dinero https://mcp.dinero.dk/mcp
 **Claude Code — alle moduler:**
 
 ```bash
-git clone https://github.com/MortenKrogKatic/dinero-skills.git
+git clone https://github.com/digi-tal-regnskab/dinero-skills.git
 cp -r dinero-skills/dinero-* ~/.claude/skills/
 ```
 
