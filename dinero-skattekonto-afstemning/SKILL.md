@@ -17,6 +17,10 @@ Skattekontoen hos SKAT er en uafhængig kilde — perfekt til afstemning. MCP'en
 ingen adgang til SKAT, så bed brugeren hente **skattekonto-udtrækket** på skat.dk
 (TastSelv Erhverv → Skattekontoen) som fil for perioden.
 
+**Findes 63300 ikke i kontoplanen?** Så kan du ikke oprette den — bed brugeren
+gøre det i Dinero (Indstillinger → Kontoplan) under kortfristet gæld, og vent.
+Uden den konto er der intet at afstemme mod.
+
 **Målbilledet:** konto **63300 Skattekonto** i bogholderiet skal spejle SKATs
 skattekonto 1:1 — hver bevægelse på udtoget har en postering på 63300, og
 63300-saldoen matcher SKATs saldo på enhver dato. SKAT-relaterede posteringer
@@ -86,11 +90,24 @@ udfør, verificér.
    før du planlægger. Ingen Dinero-tools? Så er forbindelsen ikke sat op — guide:
    tilføj `https://mcp.dinero.dk/mcp` som connector (login via Visma Connect,
    kræver Dinero Pro/Total) — og stop der; lad som om intet er udført.
-5. **MCP v1 kan:** slå fakturaer/kontakter/produkter/kontoplan op; oprette og
-   bogføre fakturaer, kreditnotaer, køb og kassekladder; registrere betalinger;
-   hente bilag som PDF; uploade til bilagsarkivet; trække saldobalance og
-   kontospecifikation. **Kan bevidst IKKE:** sende fakturaer, hente bankdata eller
-   læse ubogførte kassekladde-linjer — og rapporter viser kun bogført materiale.
+5. **Hvad MCP'en kan — og ikke kan.**
+   **Opslag:** organisationer, kontakter, produkter, kontoplan (og den separate
+   købskontoliste), momskoder, regnskabsår, salgsfakturaer og -kreditnotaer
+   (filtrérbart på status og dato), kontoudtog pr. kontakt, posteringer i et
+   datointerval, og bilagsarkivets filer — herunder hvilke der endnu er ubrugte,
+   og den smart-scannede købskladde en fil har affødt.
+   **Skrivning:** oprette og bogføre salgsfakturaer, salgs- og købskreditnotaer,
+   købsbilag og finansbilag; registrere ind- og udbetalinger; oprette og rette
+   kontakter; oprette produkter; uploade bilag; slette **kladder**.
+   **Tilbud:** oprette, liste, **sende** og konvertere til faktura.
+   **Kan IKKE:** sende fakturaer og kreditnotaer (kun tilbud kan sendes); hente
+   bankdata; læse ubogførte kassekladde-linjer (købs- og fakturakladder kan
+   derimod godt læses); oprette eller ændre konti i kontoplanen; oprette
+   regnskabsår; slette bogført materiale.
+   **Rapport-fælden:** resultat, balance og saldobalance kan kun trækkes for et
+   **helt regnskabsår** — ikke en vilkårlig periode. Skal du bruge en måned eller
+   et kvartal, byg tallet af posteringslisten, som til gengæld kun kan spænde over
+   ét regnskabsår ad gangen. Rapporter viser kun bogført materiale.
 6. **Beløbsfælden:** købsbilag og kassekladde-linjer angives **inkl. moms**;
    salgsfaktura-linjer angives **ekskl. moms**. Vis altid begge tal.
 7. **Flag i stedet for at gætte** ved uklare betalinger og skarpe fradragsregler —

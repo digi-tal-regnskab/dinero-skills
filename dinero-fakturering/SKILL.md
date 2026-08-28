@@ -5,9 +5,11 @@ description: >
   officielle MCP-server — med respekt for Dineros farligste fælde: den permanente
   nummerserie. Brug denne skill når brugeren vil lave/udstede en faktura, kreditere en
   faktura, registrere en indbetaling/udligning, eller have styr på betalingsbetingelser
-  og rykkerliste. Trigger på "faktura", "fakturér", "kreditnota", "regning til kunde",
-  "registrér betaling", "udlign" og lignende i dansk Dinero-kontekst. Bemærk: MCP'en kan
-  IKKE sende fakturaer — afsendelse sker i Dineros UI.
+  og rykkerliste — og lav tilbud, som er det eneste dokument MCP'en kan sende.
+  Trigger på "faktura", "fakturér", "kreditnota", "regning til kunde",
+  "registrér betaling", "udlign", "tilbud", "giv et tilbud" og lignende i dansk
+  Dinero-kontekst. Bemærk: MCP'en kan IKKE sende fakturaer og kreditnotaer —
+  afsendelse sker i Dineros UI.
 license: MIT
 ---
 
@@ -33,8 +35,28 @@ stop-ved-fejl, aldrig parallelt.
 4. Linjebeskrivelser: konkrete (ydelse, projekt, periode). Fast tekst/aftaletekst:
    kig på virksomhedens seneste fakturaer og følg stilen.
 5. Kladde → vis → accept → bogfør → verificér (nummeret kommer i bogføringssvaret).
-6. **Afsendelse sker i Dineros UI** — MCP'en kan ikke sende. Sig det eksplicit, og
-   lov aldrig at fakturaen "er sendt".
+6. **Afsendelse sker i Dineros UI** — MCP'en kan ikke sende fakturaer og
+   kreditnotaer (kun tilbud kan sendes). Sig det eksplicit, og lov aldrig at
+   fakturaen "er sendt".
+
+## Tilbud
+
+Tilbud er den ene undtagelse fra alt ovenstående: **et tilbud har ingen
+regnskabsmæssig virkning** — der bogføres intet, og nummerserien røres ikke.
+Derfor er det også det eneste dokument MCP'en må sende til kunden.
+
+- **Linjerne er de samme** som på en faktura: konto, momskode, enhed, beløb
+  ekskl. moms. Vælg dem lige så omhyggeligt — de følger med over på fakturaen,
+  når kunden siger ja, og en forkert momskode her bliver en forkert momskode i
+  regnskabet.
+- **EU-salg:** skal linjerne på en omvendt betalingspligt-konto, så verificér
+  købers momsnummer i VIES **nu** — ikke først når tilbuddet bliver til faktura.
+- **Arbejdsgangen:** opret → vis brugeren hele indholdet → få accept → send.
+  Afsendelse er en udgående handling til en rigtig kunde: spørg eksplicit før
+  du sender, hver gang.
+- **Når kunden accepterer** konverteres tilbuddet til en faktura. Først dér
+  tildeles et fakturanummer, og alle nummerserie-reglerne ovenfor gælder igen.
+- Brug tilbudslisten til at se hvad der er sendt og stadig er ubesvaret.
 
 ## Kreditnotaer
 
@@ -82,11 +104,24 @@ udfør, verificér.
    før du planlægger. Ingen Dinero-tools? Så er forbindelsen ikke sat op — guide:
    tilføj `https://mcp.dinero.dk/mcp` som connector (login via Visma Connect,
    kræver Dinero Pro/Total) — og stop der; lad som om intet er udført.
-5. **MCP v1 kan:** slå fakturaer/kontakter/produkter/kontoplan op; oprette og
-   bogføre fakturaer, kreditnotaer, køb og kassekladder; registrere betalinger;
-   hente bilag som PDF; uploade til bilagsarkivet; trække saldobalance og
-   kontospecifikation. **Kan bevidst IKKE:** sende fakturaer, hente bankdata eller
-   læse ubogførte kassekladde-linjer — og rapporter viser kun bogført materiale.
+5. **Hvad MCP'en kan — og ikke kan.**
+   **Opslag:** organisationer, kontakter, produkter, kontoplan (og den separate
+   købskontoliste), momskoder, regnskabsår, salgsfakturaer og -kreditnotaer
+   (filtrérbart på status og dato), kontoudtog pr. kontakt, posteringer i et
+   datointerval, og bilagsarkivets filer — herunder hvilke der endnu er ubrugte,
+   og den smart-scannede købskladde en fil har affødt.
+   **Skrivning:** oprette og bogføre salgsfakturaer, salgs- og købskreditnotaer,
+   købsbilag og finansbilag; registrere ind- og udbetalinger; oprette og rette
+   kontakter; oprette produkter; uploade bilag; slette **kladder**.
+   **Tilbud:** oprette, liste, **sende** og konvertere til faktura.
+   **Kan IKKE:** sende fakturaer og kreditnotaer (kun tilbud kan sendes); hente
+   bankdata; læse ubogførte kassekladde-linjer (købs- og fakturakladder kan
+   derimod godt læses); oprette eller ændre konti i kontoplanen; oprette
+   regnskabsår; slette bogført materiale.
+   **Rapport-fælden:** resultat, balance og saldobalance kan kun trækkes for et
+   **helt regnskabsår** — ikke en vilkårlig periode. Skal du bruge en måned eller
+   et kvartal, byg tallet af posteringslisten, som til gengæld kun kan spænde over
+   ét regnskabsår ad gangen. Rapporter viser kun bogført materiale.
 6. **Beløbsfælden:** købsbilag og kassekladde-linjer angives **inkl. moms**;
    salgsfaktura-linjer angives **ekskl. moms**. Vis altid begge tal.
 7. **Flag i stedet for at gætte** ved uklare betalinger og skarpe fradragsregler —
