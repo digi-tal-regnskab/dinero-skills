@@ -3,7 +3,8 @@ name: dinero-mellemregning
 description: >
   Kontrol af mellemregning med ejer/holding i Dinero via Dineros officielle
   MCP-server: gennemgå mellemregningskontoen postering for postering, kræv forklaring og
-  bilag, og flag ulovlige kapitalejerlån når selskabet har penge til gode hos ejeren.
+  bilag, og flag kapitalejerlån når selskabet har penge til gode hos ejeren — lånet er
+  lovligt selskabsretligt, men beskattes hos ejeren allerede ved låneoptagelsen.
   Brug denne skill når brugeren nævner mellemregning, mellemregningskonto, udlæg,
   private hævninger, ejerlån, kapitalejerlån, anpartshaverlån eller "hvad står der på
   min mellemregning?" i dansk Dinero-kontekst.
@@ -35,9 +36,21 @@ fejl bor. Gennemgå den nysgerrigt og systematisk.
 ## Kapitalejerlån (ApS/A/S) — det skarpe flag
 
 En saldo hvor **selskabet har penge til gode hos ejeren** (ejeren har hævet mere
-end indskudt) kan være et ulovligt kapitalejerlån med skattemæssige konsekvenser
-(beskatning hos ejeren, mulig indberetningspligt for revisor). Reglerne er skarpe
-og situationsafhængige:
+end indskudt) er et kapitalejerlån. **Det er ikke ulovligt** — det selskabsretlige
+forbud blev ophævet i 2017, og et kapitalselskab må yde lån til sine kapitalejere
+uden specifikke lovgivningsmæssige betingelser (selskabsloven § 210). Ledelsen skal
+dog sikre, at lånet er forsvarligt (§§ 115-118) og ikke i strid med § 127.
+
+**Smerten er skattemæssig, ikke selskabsretlig** — og den overrasker de fleste:
+skattereglerne blev ikke ændret i 2017. Et lån til en kapitalejer med bestemmende
+indflydelse beskattes **allerede på långivningstidspunktet** som løn eller udbytte
+(ligningsloven § 16 E, indført 2012), uanset at pengene skal betales tilbage. En
+senere tilbagebetaling fjerner ikke beskatningen. Sig det præcist — «ulovligt» er
+forkert og undergraver troværdigheden.
+
+Regnskabsmæssigt skal lånet vises særskilt under «Tilgodehavende hos
+virksomhedsdeltagere og ledelse», og der er notekrav ved lån til et ledelsesmedlem
+(årsregnskabsloven § 73). Reglerne er situationsafhængige:
 
 - Flag saldoen og de posteringer der skabte den, tydeligt og uden dramatik.
 - Henvis til revisor for håndteringen — foreslå IKKE selv "løsninger" (udbytte,
