@@ -43,12 +43,27 @@ claude mcp add --scope user --transport http dinero https://mcp.dinero.dk/mcp
 i den mappe, kommandoen blev kørt i. Regnskabet skal typisk være tilgængeligt i
 alle projekter.
 
-Derefter **login**: kør `/mcp` i en **interaktiv** `claude`-session, vælg dinero
-og gennemfør Visma Connect i browseren. Login kan ikke gennemføres i en
-non-interaktiv session (fx `claude -p`, et script eller en baggrundsagent) —
-serveren kan tilføjes, men status forbliver "Needs authentication", indtil nogen
-logger ind interaktivt én gang. Efter det virker forbindelsen også i
-non-interaktive sessioner.
+Derefter **login** — én kommando, som åbner Visma Connect i browseren:
+
+```bash
+claude mcp login dinero
+```
+
+Har maskinen ingen browser (SSH, headless), så brug `claude mcp login dinero
+--no-browser`: den printer autorisations-URL'en, du åbner den et andet sted og
+indsætter redirect-URL'en tilbage i terminalen.
+
+**Login kræver en rigtig terminal.** Begge varianter afviser med "stdin isn't a
+terminal", hvis de køres et sted uden TTY — altså fra `claude -p`, et script, en
+baggrundsagent eller Claude Codes desktop-app. Det gælder også browser-varianten:
+den stopper FØR browseren åbner, så en assistent kan ikke gennemføre login på
+brugerens vegne. Serveren kan tilføjes, men status forbliver "Needs
+authentication", indtil nogen kører kommandoen i en terminal én gang. Derefter
+virker forbindelsen også uden TTY.
+
+Kører du et sted uden terminal: tilføj serveren, giv brugeren kommandoen ovenfor,
+og bed dem sige til når de har kørt den. Lad være med at foreslå omveje
+via `/mcp`-menuen — `claude mcp login` er kortere og rammer samme flow.
 
 Verificér undervejs: `claude mcp get dinero` viser scope og status, og et kald
 mod endpointet uden token svarer korrekt `HTTP 401` (= serveren lever, login
@@ -56,7 +71,9 @@ mangler).
 
 ## Fjern adgangen igen
 
-- I AI-klientens connector-/MCP-indstillinger, eller
+- Claude Code: `claude mcp logout dinero` rydder tokenet, `claude mcp remove
+  dinero -s user` fjerner hele serveren.
+- I andre klienters connector-indstillinger, eller
 - i Dinero: **Konto → Brugerprofil → Gå til Visma Connect** → fjern appens adgang.
 
 ## Fortæl brugeren ved opsætning
